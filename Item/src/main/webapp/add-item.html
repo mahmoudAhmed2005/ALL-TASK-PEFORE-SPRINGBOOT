@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Item</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(circle at top left, #2563eb, transparent 35%),
+        radial-gradient(circle at bottom right, #06b6d4, transparent 35%),
+        #0f172a;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.97);
+    border-radius: 24px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+    animation: showCard 0.7s ease;
+}
+
+.logo {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 18px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+}
+
+h2 {
+    text-align: center;
+    color: #0f172a;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    outline: none;
+    font-size: 15px;
+    background: #f8fafc;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #2563eb;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.input-group input.invalid {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+}
+
+.input-group input.valid {
+    border-color: #22c55e;
+}
+
+.error-message {
+    display: none;
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.add-button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(37, 99, 235, 0.35);
+}
+
+.add-button:active {
+    transform: scale(0.98);
+}
+
+.add-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.back {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.back a {
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.back a:hover {
+    text-decoration: underline;
+}
+
+@keyframes showCard {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media(max-width: 500px) {
+
+    .container {
+        padding: 30px 22px;
+    }
+
+    h2 {
+        font-size: 26px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">+</div>
+
+    <h2>Add Item</h2>
+
+    <p class="subtitle">
+        Add a new item to your inventory
+    </p>
+
+
+    <form
+        id="addItemForm"
+        action="/item-serves-1/ItemController"
+        method="post"
+        novalidate>
+
+
+        <input
+            type="hidden"   name="action"  value="addItem">
+           
+            
+
+
+        <div class="input-group">
+
+            <label>Item Name</label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter item name">
+
+            <p
+                class="error-message"
+                id="nameError">
+
+                Item name is required
+
+            </p>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>Price</label>
+
+            <input
+                type="number"
+                id="price"
+                name="price"
+                placeholder="Enter item price"
+                step="0.01">
+
+            <p
+                class="error-message"
+                id="priceError">
+
+                Price must be greater than 0
+
+            </p>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>Total Number</label>
+
+            <input
+                type="number"
+                id="totalNumber"
+                name="totalNumber"
+                placeholder="Enter total quantity">
+
+            <p
+                class="error-message"
+                id="totalNumberError">
+
+                Total number must be greater than 0
+
+            </p>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="add-button"
+            id="addButton">
+
+            Add Item
+
+        </button>
+
+    </form>
+
+
+    <div class="back">
+
+        <a href="/item-serves-1/ItemController?action=showItems">
+
+            ← Back To Items
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const addItemForm =
+    document.getElementById("addItemForm");
+
+const itemName =
+    document.getElementById("name");
+
+const price =
+    document.getElementById("price");
+
+const totalNumber =
+    document.getElementById("totalNumber");
+
+const addButton =
+    document.getElementById("addButton");
+
+
+function showError(input, errorId) {
+
+    input.classList.remove("valid");
+
+    input.classList.add("invalid");
+
+    document.getElementById(errorId)
+        .style.display = "block";
+}
+
+
+function showSuccess(input, errorId) {
+
+    input.classList.remove("invalid");
+
+    input.classList.add("valid");
+
+    document.getElementById(errorId)
+        .style.display = "none";
+}
+
+
+function validateName() {
+
+    if (itemName.value.trim() === "") {
+
+        showError(
+            itemName,
+            "nameError"
+        );
+
+        return false;
+    }
+
+
+    showSuccess(
+        itemName,
+        "nameError"
+    );
+
+    return true;
+}
+
+
+function validatePrice() {
+
+    if (
+        price.value === "" ||
+        Number(price.value) <= 0
+    ) {
+
+        showError(
+            price,
+            "priceError"
+        );
+
+        return false;
+    }
+
+
+    showSuccess(
+        price,
+        "priceError"
+    );
+
+    return true;
+}
+
+
+function validateTotalNumber() {
+
+    if (
+        totalNumber.value === "" ||
+        Number(totalNumber.value) <= 0
+    ) {
+
+        showError(
+            totalNumber,
+            "totalNumberError"
+        );
+
+        return false;
+    }
+
+
+    showSuccess(
+        totalNumber,
+        "totalNumberError"
+    );
+
+    return true;
+}
+
+
+itemName.addEventListener(
+    "input",
+    validateName
+);
+
+price.addEventListener(
+    "input",
+    validatePrice
+);
+
+totalNumber.addEventListener(
+    "input",
+    validateTotalNumber
+);
+
+
+addItemForm.addEventListener(
+    "submit",
+    function(event) {
+
+        const isNameValid =
+            validateName();
+
+        const isPriceValid =
+            validatePrice();
+
+        const isTotalNumberValid =
+            validateTotalNumber();
+
+
+        if (
+            !isNameValid ||
+            !isPriceValid ||
+            !isTotalNumberValid
+        ) {
+
+            event.preventDefault();
+
+            return;
+        }
+
+
+        addButton.disabled = true;
+
+        addButton.textContent =
+            "Adding Item...";
+    }
+);
+
+</script>
+
+</body>
+
+</html>
+
